@@ -62,8 +62,6 @@ const processImages = async () => {
       // console.log(`${fileName}의 그레이스케일 값: ${averageGrayscale.pop()}`);
     }
 
-    console.log(averageGrayscale)
-
     return averageGrayscale;
   } catch (err) {
     console.error("에러 발생:", err);
