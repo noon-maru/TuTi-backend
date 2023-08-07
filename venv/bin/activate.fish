@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/jeong-yeonhan/Documents/code/noon-maru/TuTi-backend/venv"
+set -gx VIRTUAL_ENV "/config/workspace/express/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

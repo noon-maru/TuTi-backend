@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/jeong-yeonhan/Documents/code/noon-maru/TuTi-backend/venv"
+VIRTUAL_ENV="/config/workspace/express/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
