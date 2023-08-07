@@ -5,6 +5,7 @@ import fs from "fs/promises";
 const scriptPath: string = path.join(
   __dirname,
   "../",
+  "../",
   "scripts",
   "ImagePreprocessing.py"
 );
@@ -45,7 +46,7 @@ const calculateAverageGrayscale = async (
 
 const processImages = async () => {
   try {
-    const folderPath = path.join(__dirname, "../", "public", "carousel");
+    const folderPath = path.join(__dirname, "../", "../", "public", "carousel");
     const files = await fs.readdir(folderPath);
 
     const fileNames = files;
