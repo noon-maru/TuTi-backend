@@ -14,7 +14,7 @@ const calculateAverageGrayscale = async (
   imagePath: string
 ): Promise<number> => {
   return new Promise<number>((resolve, reject) => {
-    const process = spawn("python", [scriptPath, imagePath]);
+    const process = spawn("python3", [scriptPath, imagePath]);
 
     let stdoutData = "";
 
@@ -60,6 +60,8 @@ const processImages = async () => {
       averageGrayscale.push({ fileName, grayscaleValue });
       // console.log(`${fileName}의 그레이스케일 값: ${averageGrayscale.pop()}`);
     }
+
+    console.log(averageGrayscale)
 
     return averageGrayscale;
   } catch (err) {
