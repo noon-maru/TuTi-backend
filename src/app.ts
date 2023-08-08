@@ -27,7 +27,7 @@ app.use(routes.api + routes.recommendedplaces, recommendedPlaceRouter);
 app.use(routes.api + routes.carousel, carouselRouter);
 app.use(
   "/carousel",
-  express.static(path.join(__dirname, "public", "carousel"))
+  express.static(path.join(__dirname, "../", "public", "carousel"))
 );
 
 app.get("/", (req: Request, res: Response) => {
