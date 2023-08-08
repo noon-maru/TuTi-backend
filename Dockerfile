@@ -21,8 +21,9 @@ RUN yarn global add nodemon ts-node typescript
 
 COPY . .
 
+
 # 포트 8080을 열어 Express 서버가 외부와 통신할 수 있도록 합니다.
 EXPOSE 8080
 
 # 서버를 실행합니다.
-CMD ["yarn", "dev"]
+CMD ["yarn", "start"]
