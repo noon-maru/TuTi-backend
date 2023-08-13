@@ -4,7 +4,7 @@ import path from "path";
 // 이미지를 저장할 경로와 파일명 설정
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../", "public", "carousel"));
+    cb(null, path.join(__dirname, "../", "../", "public", "carousel"));
   },
   filename: (req, file, cb) => {
     cb(null, `carousel_temp.png`); // 임시로 파일명 생성

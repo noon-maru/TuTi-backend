@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import path from "path";
+import cors from "cors";
 import dotenv from "dotenv";
 
 import connectDB from "./db";
@@ -16,6 +17,7 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
 connectDB();
 
@@ -25,13 +27,17 @@ app.use(routes.api + routes.users, usersRouter);
 app.use(routes.api + routes.place, placeRouter);
 app.use(routes.api + routes.recommendedplaces, recommendedPlaceRouter);
 app.use(routes.api + routes.carousel, carouselRouter);
+
+// React 앱의 정적 파일 제공
 app.use(
-  "/carousel",
-  express.static(path.join(__dirname, "../", "public", "carousel"))
+  express.static(path.join(__dirname, "../", "../", "tuti-react/", "build"))
 );
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("TuTi 서버 동작중...");
+// api 요청 이외의 모든 요청을 React 앱으로 라우팅
+app.use("*", (req: Request, res: Response) => {
+  res.sendFile(
+    path.join(__dirname, "../", "../", "tuti-react/", "build", "index.html")
+  );
 });
 
 app.listen(app.get("port"), () =>

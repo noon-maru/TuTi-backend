@@ -20,10 +20,14 @@ const averageGrayscaleValuePromise = processImages();
 export const getCarousel = async (req: Request, res: Response) => {
   try {
     // 이미지와 함께 변수 값을 응답으로 전송
-    const averageGrayscaleValues = await averageGrayscaleValuePromise;
+    let averageGrayscaleValues = await averageGrayscaleValuePromise;
 
     if (!averageGrayscaleValues) {
-      console.error("그레이스케일 값이 없습니다.");
+      averageGrayscaleValues = await processImages();
+    }
+
+    if (!averageGrayscaleValues) {
+      console.error("그레이스케일 계산에 문제가 발생했습니다.");
       return res.status(500).send("Internal Server Error");
     }
 
@@ -64,12 +68,14 @@ export const postCarousel = (req: Request, res: Response) => {
     const tempFileName = path.join(
       __dirname,
       "../",
+      "../",
       "public",
       "carousel",
       "carousel_temp.png"
     );
     const finalFileName = path.join(
       __dirname,
+      "../",
       "../",
       "public",
       "carousel",
