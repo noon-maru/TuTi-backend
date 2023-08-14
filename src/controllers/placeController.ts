@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import Place from "@models/placeModel";
 
 export const createPlace = async (req: Request, res: Response) => {
-  const { region, name, address, image } = req.body;
+  const { region, name, address, image, numberHearts } = req.body;
 
   try {
     const newPlace = new Place({
@@ -11,6 +11,7 @@ export const createPlace = async (req: Request, res: Response) => {
       name,
       address,
       image,
+      numberHearts,
     });
 
     const savedPlace = await newPlace.save();
@@ -34,12 +35,12 @@ export const getPlaces = async (req: Request, res: Response) => {
 
 export const updatePlace = async (req: Request, res: Response) => {
   const { placeId } = req.params;
-  const { region, name, address, image } = req.body;
+  const { region, name, address, image, numberHearts } = req.body;
 
   try {
     const updatedPlace = await Place.findByIdAndUpdate(
       placeId,
-      { region, name, address, image },
+      { region, name, address, image, numberHearts },
       { new: true }
     );
 
