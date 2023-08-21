@@ -6,16 +6,24 @@ import Tag from "@models/tagModel";
 export const createPlace = async (req: Request, res: Response) => {
   const { region, name, address, image, numberHearts, tag } = req.body;
 
-  const tags = await createTag(tag);
+  const newTagIds = await createTag(tag);
 
   try {
+    // 이미 존재하는 장소인지 확인
+    const existingPlace = await Place.findOne({ name, address });
+
+    if (existingPlace) {
+      // 이미 존재하는 장소이면 해당 장소의 정보를 반환하고 함수 종료
+      return res.status(400).json({ message: "이미 존재하는 장소입니다." });
+    }
+
     const newPlace = new Place({
       region,
       name,
       address,
       image,
       numberHearts,
-      tags,
+      tags: newTagIds,
     });
 
     const savedPlace = await newPlace.save();
