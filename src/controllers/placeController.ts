@@ -65,7 +65,7 @@ export const createTag = async (tagNames: string[]) => {
 
 export const getAllPlaces = async (req: Request, res: Response) => {
   try {
-    const places = await Place.find();
+    const places = await Place.find().populate("tags");
     res.json(places);
   } catch (err) {
     console.error(err);
@@ -77,7 +77,7 @@ export const getPlaceByName = async (req: Request, res: Response) => {
   const { placeName } = req.params;
 
   try {
-    const place = await Place.findOne({ name: placeName });
+    const place = await Place.findOne({ name: placeName }).populate("tags");
 
     if (!place) {
       return res
@@ -96,7 +96,7 @@ export const getPlacesByRegion = async (req: Request, res: Response) => {
   const { regionName } = req.params;
 
   try {
-    const places = await Place.find({ region: regionName });
+    const places = await Place.find({ region: regionName }).populate("tags");
 
     if (places.length === 0) {
       return res
