@@ -25,6 +25,9 @@ const WISHPLACE: string = "/wishplace";
 // PLACE
 const PLACE: string = "/place";
 const RECOMMENDEDPLACE: string = "/recommendedplaces";
+const NAME: string = "/name";
+const REGION: string = "/region";
+const TAG: string = "/tag";
 
 // HOME SCREEN
 const CAROUSEL: string = "/carousel";
@@ -45,6 +48,9 @@ interface Routes {
 
   place: string;
   recommendedplaces: string;
+  name: string;
+  region: string;
+  tag: string;
 
   carousel: string;
 }
@@ -65,6 +71,9 @@ const routes: Routes = {
 
   place: PLACE,
   recommendedplaces: RECOMMENDEDPLACE,
+  name: NAME,
+  region: REGION,
+  tag: TAG,
 
   carousel: CAROUSEL,
 };

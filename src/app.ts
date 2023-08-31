@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 
 import connectDB from "./db";
 
+import { setupRouter } from "@routers/index";
+
 import routes from "@routers/routes";
 import usersRouter from "@routers/userRouter";
 import placeRouter from "@routers/placeRouter";
@@ -20,6 +22,8 @@ app.use(express.json());
 app.use(cors());
 
 connectDB();
+
+setupRouter(app);
 
 app.set("port", process.env.PORT || 3000);
 
