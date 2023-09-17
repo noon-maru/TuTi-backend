@@ -41,6 +41,14 @@ const placeRoutesAPI = {
                   type: "string",
                   example: "부산광역시 수영구 광안해변로 361",
                 },
+                latitude: {
+                  type: "number",
+                  example: 129.13450507988688,
+                },
+                longitude: {
+                  type: "number",
+                  example: 35.15571143112305,
+                },
                 image: {
                   type: "string",
                   example:
@@ -49,6 +57,10 @@ const placeRoutesAPI = {
                 numberHearts: {
                   type: "integer",
                   example: 47,
+                },
+                is_landmark: {
+                  type: "boolean",
+                  example: true,
                 },
                 tag: {
                   type: "array",
@@ -82,14 +94,26 @@ const placeRoutesAPI = {
                     type: "string",
                     example: "부산광역시 수영구 광안해변로 361",
                   },
+                  latitude: {
+                    type: "number",
+                    example: 129.13450507988688,
+                  },
+                  longitude: {
+                    type: "number",
+                    example: 35.15571143112305,
+                  },
                   image: {
                     type: "string",
                     example:
                       "/static/photo/JPG/부산광역시/수변공원/FN1A2519-HDR.jpg",
                   },
                   numberHearts: {
-                    type: "integer",
+                    type: "number",
                     example: 47,
+                  },
+                  is_landmark: {
+                    type: "integer",
+                    example: true,
                   },
                   tags: {
                     type: "array",

@@ -6,11 +6,23 @@ export const definitions = {
       region: { type: "string", example: "서울" },
       name: { type: "string", example: "롯데타워" },
       address: { type: "string", example: "서울특별시 송파구 올림픽로 300" },
+      latitude: {
+        type: "number",
+        example: 129.13450507988688,
+      },
+      longitude: {
+        type: "number",
+        example: 35.15571143112305,
+      },
       image: {
         type: "string",
         example: "/static/photo/JPG/서울특별시/송파구/{이미지 이름}.jpg",
       },
       numberHearts: { type: "integer", format: "int32", example: 100 },
+      is_landmark: {
+        type: "boolean",
+        example: true,
+      },
       tags: {
         type: "array",
         items: {

@@ -4,7 +4,17 @@ import Place from "@models/placeModel";
 import Tag from "@models/tagModel";
 
 export const createPlace = async (req: Request, res: Response) => {
-  const { region, name, address, image, numberHearts, tag } = req.body;
+  const {
+    region,
+    name,
+    address,
+    latitude,
+    longitude,
+    image,
+    numberHearts,
+    is_landmark,
+    tag,
+  } = req.body;
 
   const newTagIds = await createTag(tag);
 
@@ -21,8 +31,11 @@ export const createPlace = async (req: Request, res: Response) => {
       region,
       name,
       address,
+      latitude,
+      longitude,
       image,
       numberHearts,
+      is_landmark,
       tags: newTagIds,
     });
 
@@ -130,12 +143,34 @@ export const getPlaceByTag = async (req: Request, res: Response) => {
 
 export const updatePlace = async (req: Request, res: Response) => {
   const { placeId } = req.params;
-  const { region, name, address, image, numberHearts } = req.body;
+  const {
+    region,
+    name,
+    address,
+    latitude,
+    longitude,
+    image,
+    numberHearts,
+    is_landmark,
+    tag,
+  } = req.body;
+
+  const newTagIds = await createTag(tag);
 
   try {
     const updatedPlace = await Place.findByIdAndUpdate(
       placeId,
-      { region, name, address, image, numberHearts },
+      {
+        region,
+        name,
+        address,
+        latitude,
+        longitude,
+        image,
+        numberHearts,
+        is_landmark,
+        tags: newTagIds,
+      },
       { new: true }
     );
 
