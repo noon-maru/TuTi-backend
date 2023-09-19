@@ -32,7 +32,7 @@ export const definitions = {
       tourismInfo: {
         type: "object",
         properties: {
-          admissionFee: { type: "string", example: "5000원" },
+          admissionFee: { type: "integer", example: 5000 },
           closedDays: {
             type: "array",
             items: {
