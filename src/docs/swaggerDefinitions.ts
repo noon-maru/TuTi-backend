@@ -29,6 +29,36 @@ export const definitions = {
           $ref: "#/components/schemas/Tag",
         },
       },
+      tourismInfo: {
+        type: "object",
+        properties: {
+          admissionFee: { type: "string", example: "5000원" },
+          closedDays: {
+            type: "array",
+            items: {
+              type: "string",
+            },
+          },
+          subwayInfo: { type: "string", example: "가까운 지하철역: 예시역" },
+          busInfo: {
+            type: "object",
+            properties: {
+              busRoutes: {
+                type: "array",
+                items: {
+                  type: "string",
+                },
+              },
+              busStops: {
+                type: "array",
+                items: {
+                  type: "string",
+                },
+              },
+            },
+          },
+        },
+      },
     },
   },
   RecommendedPlace: {

@@ -14,6 +14,7 @@ export const createPlace = async (req: Request, res: Response) => {
     numberHearts,
     is_landmark,
     tag,
+    tourismInfo, // 새로운 관광 정보 필드 추가
   } = req.body;
 
   const newTagIds = await createTag(tag);
@@ -37,6 +38,7 @@ export const createPlace = async (req: Request, res: Response) => {
       numberHearts,
       is_landmark,
       tags: newTagIds,
+      tourismInfo, // 관광 정보 추가
     });
 
     const savedPlace = await newPlace.save();
@@ -153,6 +155,7 @@ export const updatePlace = async (req: Request, res: Response) => {
     numberHearts,
     is_landmark,
     tag,
+    tourismInfo,
   } = req.body;
 
   const newTagIds = await createTag(tag);
@@ -170,6 +173,7 @@ export const updatePlace = async (req: Request, res: Response) => {
         numberHearts,
         is_landmark,
         tags: newTagIds,
+        tourismInfo,
       },
       { new: true }
     );

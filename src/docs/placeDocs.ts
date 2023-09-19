@@ -69,6 +69,45 @@ const placeRoutesAPI = {
                   },
                   example: ["공원", "해변"],
                 },
+                tourismInfo: {
+                  type: "object", // 관광 정보에 대한 스키마 정의
+                  properties: {
+                    admissionFee: {
+                      type: "string",
+                      example: "5000원",
+                    },
+                    closedDays: {
+                      type: "array",
+                      items: {
+                        type: "string",
+                      },
+                      example: ["월요일", "화요일"],
+                    },
+                    subwayInfo: {
+                      type: "string",
+                      example: "가까운 지하철역: 예시역",
+                    },
+                    busInfo: {
+                      type: "object", // 버스 정보에 대한 스키마 정의
+                      properties: {
+                        busRoutes: {
+                          type: "array",
+                          items: {
+                            type: "string",
+                          },
+                          example: ["101번 버스", "202번 버스"],
+                        },
+                        busStops: {
+                          type: "array",
+                          items: {
+                            type: "string",
+                          },
+                          example: ["버스 정류장 A", "버스 정류장 B"],
+                        },
+                      },
+                    },
+                  },
+                },
               },
             },
           },
@@ -124,6 +163,45 @@ const placeRoutesAPI = {
                       "64e300e91e636c9e53de3422",
                       "64e48f99b85a57f44c5928c0",
                     ],
+                  },
+                  tourismInfo: {
+                    type: "object", // 관광 정보에 대한 스키마 정의
+                    properties: {
+                      admissionFee: {
+                        type: "string",
+                        example: "5000원",
+                      },
+                      closedDays: {
+                        type: "array",
+                        items: {
+                          type: "string",
+                        },
+                        example: ["월요일", "화요일"],
+                      },
+                      subwayInfo: {
+                        type: "string",
+                        example: "가까운 지하철역: 예시역",
+                      },
+                      busInfo: {
+                        type: "object", // 버스 정보에 대한 스키마 정의
+                        properties: {
+                          busRoutes: {
+                            type: "array",
+                            items: {
+                              type: "string",
+                            },
+                            example: ["101번 버스", "202번 버스"],
+                          },
+                          busStops: {
+                            type: "array",
+                            items: {
+                              type: "string",
+                            },
+                            example: ["버스 정류장 A", "버스 정류장 B"],
+                          },
+                        },
+                      },
+                    },
                   },
                   _id: {
                     type: "string",
