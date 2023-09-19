@@ -84,8 +84,14 @@ const placeRoutesAPI = {
                       example: ["월요일", "화요일"],
                     },
                     subwayInfo: {
-                      type: "string",
-                      example: "가까운 지하철역: 예시역",
+                      type: "array",
+                      items: {
+                        type: "string",
+                        example: [
+                          "가까운 지하철역: 예시역1",
+                          "가까운 지하철역: 예시역2",
+                        ],
+                      },
                     },
                     busInfo: {
                       type: "object", // 버스 정보에 대한 스키마 정의
@@ -179,8 +185,14 @@ const placeRoutesAPI = {
                         example: ["월요일", "화요일"],
                       },
                       subwayInfo: {
-                        type: "string",
-                        example: "가까운 지하철역: 예시역",
+                        type: "array",
+                        items: {
+                          type: "string",
+                          example: [
+                            "가까운 지하철역: 예시역1",
+                            "가까운 지하철역: 예시역2",
+                          ],
+                        },
                       },
                       busInfo: {
                         type: "object", // 버스 정보에 대한 스키마 정의

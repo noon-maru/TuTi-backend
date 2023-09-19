@@ -39,7 +39,13 @@ export const definitions = {
               type: "string",
             },
           },
-          subwayInfo: { type: "string", example: "가까운 지하철역: 예시역" },
+          subwayInfo: {
+            type: "array",
+            items: {
+              type: "string",
+              example: ["가까운 지하철역: 예시역1", "가까운 지하철역: 예시역2"],
+            },
+          },
           busInfo: {
             type: "object",
             properties: {
