@@ -73,8 +73,8 @@ const placeRoutesAPI = {
                   type: "object", // 관광 정보에 대한 스키마 정의
                   properties: {
                     admissionFee: {
-                      type: "integer",
-                      example: 5000,
+                      type: "string",
+                      example: "5000원",
                     },
                     closedDays: {
                       type: "array",
@@ -174,8 +174,8 @@ const placeRoutesAPI = {
                     type: "object", // 관광 정보에 대한 스키마 정의
                     properties: {
                       admissionFee: {
-                        type: "integer",
-                        example: 5000,
+                        type: "string",
+                        example: "5000원",
                       },
                       closedDays: {
                         type: "array",
