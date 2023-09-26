@@ -32,6 +32,11 @@ export const definitions = {
       tourismInfo: {
         type: "object",
         properties: {
+          parkingInfo: { type: "string", example: "주차수용 : 60대 /☆☆★" },
+          advice: {
+            type: "string",
+            example: "모자를 챙겨가시는 걸 추천합니다.",
+          },
           admissionFee: { type: "string", example: "5000원" },
           closedDays: {
             type: "array",

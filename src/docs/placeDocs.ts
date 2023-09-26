@@ -72,6 +72,14 @@ const placeRoutesAPI = {
                 tourismInfo: {
                   type: "object", // 관광 정보에 대한 스키마 정의
                   properties: {
+                    parkingInfo: {
+                      type: "string",
+                      example: "주차수용 : 60대 /☆☆★",
+                    },
+                    advice: {
+                      type: "string",
+                      example: "모자를 챙겨가시는 걸 추천합니다.",
+                    },
                     admissionFee: {
                       type: "string",
                       example: "5000원",
@@ -173,6 +181,14 @@ const placeRoutesAPI = {
                   tourismInfo: {
                     type: "object", // 관광 정보에 대한 스키마 정의
                     properties: {
+                      parkingInfo: {
+                        type: "string",
+                        example: "주차수용 : 60대 /☆☆★",
+                      },
+                      advice: {
+                        type: "string",
+                        example: "모자를 챙겨가시는 걸 추천합니다.",
+                      },
                       admissionFee: {
                         type: "string",
                         example: "5000원",

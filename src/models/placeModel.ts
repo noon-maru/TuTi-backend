@@ -13,6 +13,8 @@ const placeSchema = new Schema({
   is_landmark: { type: Boolean, default: false }, // 해당 장소가 랜드마크인지 여부
   tags: [{ type: Schema.Types.ObjectId, ref: "Tag" }],
   tourismInfo: {
+    parkingInfo: { type: String },
+    advice: { type: String },
     admissionFee: { type: String, default: 0 }, // 입장료
     closedDays: [{ type: String }], // 휴무일 (여러 날짜가 될 수 있으므로 배열 사용)
     subwayInfo: [{ type: String }], // 지하철 정보
