@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  deleteWishPlace,
   getRandomWishPlaces,
   getWishPlaces,
   postWishPlace,
@@ -15,5 +16,7 @@ router.get("/random", getRandomWishPlaces);
 
 // 찜 한 장소를 추가하는 라우터
 router.post("/", postWishPlace);
+
+router.delete("/", deleteWishPlace);
 
 export default router;

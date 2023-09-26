@@ -126,3 +126,42 @@ export const postWishPlace = async (req: Request, res: Response) => {
     return res.status(500).json({ message: "서버 오류" });
   }
 };
+
+// 유저가 찜한 장소를 삭제하는 컨트롤러
+export const deleteWishPlace = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  const { placeId } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(placeId)) {
+    return res.status(400).json({ message: "잘못된 요청입니다." });
+  }
+
+  try {
+    const user = await User.findOne({ id: userId });
+    const place = await Place.findById(placeId);
+
+    if (!user || !place) {
+      return res
+        .status(404)
+        .json({ message: "사용자 또는 장소를 찾을 수 없습니다." });
+    }
+
+    // 찜한 장소를 찾아서 삭제
+    const deletedWishPlace = await WishPlace.findOneAndDelete({
+      user: user._id,
+      place: place._id,
+    });
+
+    if (!deletedWishPlace) {
+      return res.json({ message: "찜한 장소를 찾을 수 없습니다." });
+    }
+
+    return res.json({
+      message: "찜한 장소가 성공적으로 삭제되었습니다.",
+      deletedWishPlace,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "서버 오류" });
+  }
+};

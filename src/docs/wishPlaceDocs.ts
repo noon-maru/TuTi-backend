@@ -66,6 +66,41 @@ const wishPlaceRoutesAPI = {
         },
       },
     },
+    delete: {
+      tags: ["WishPlace"],
+      summary: "유저가 찜한 장소 삭제",
+      description: "유저가 찜한 장소를 삭제합니다.",
+      parameters: [
+        {
+          name: "userId",
+          in: "path",
+          description: "찜한 장소를 삭제하려하는 사용자의 ID",
+          required: true,
+          type: "string",
+        },
+        {
+          name: "placeId",
+          in: "body",
+          description: "찜을 해제하려는 장소의 ID",
+          required: true,
+          type: "string",
+        },
+      ],
+      responses: {
+        200: {
+          description: "찜한 장소가 성공적으로 삭제되었습니다.",
+        },
+        400: {
+          description: "잘못된 요청입니다.",
+        },
+        404: {
+          description: "사용자 또는 장소를 찾을 수 없습니다.",
+        },
+        500: {
+          description: "서버 오류",
+        },
+      },
+    },
   },
   [routes.api + routes.users + routes.userid + routes.wishplace + "/random"]: {
     // 유저가 찜한 장소 중 랜덤한 3개를 가져오는 API
