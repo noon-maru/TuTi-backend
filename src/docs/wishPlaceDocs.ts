@@ -43,14 +43,23 @@ const wishPlaceRoutesAPI = {
           required: true,
           type: "string",
         },
-        {
-          name: "placeId",
-          in: "body",
-          description: "찜하려는 장소의 ID",
-          required: true,
-          type: "string",
-        },
       ],
+      requestBody: {
+        required: true,
+        content: {
+          "application/json": {
+            schema: {
+              type: "string",
+              properties: {
+                placeId: {
+                  type: "string",
+                  example: "64d8a25911a192dcd638051c",
+                },
+              },
+            },
+          },
+        },
+      },
       responses: {
         200: {
           description: "장소가 성공적으로 찜되었습니다.",
@@ -78,14 +87,23 @@ const wishPlaceRoutesAPI = {
           required: true,
           type: "string",
         },
-        {
-          name: "placeId",
-          in: "body",
-          description: "찜을 해제하려는 장소의 ID",
-          required: true,
-          type: "string",
-        },
       ],
+      requestBody: {
+        required: true,
+        content: {
+          "application/json": {
+            schema: {
+              type: "string",
+              properties: {
+                placeId: {
+                  type: "string",
+                  example: "64d8a25911a192dcd638051c",
+                },
+              },
+            },
+          },
+        },
+      },
       responses: {
         200: {
           description: "찜한 장소가 성공적으로 삭제되었습니다.",
