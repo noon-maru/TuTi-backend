@@ -5,8 +5,10 @@ import { isAdmin } from "@middleware/isAdmin";
 import {
   createCourse,
   createRecommendedCourse,
+  deleteCourse,
   getCourse,
   getRecommendedCourse,
+  updateCourse,
 } from "@controllers/courseController";
 
 const router = express.Router();
@@ -25,5 +27,9 @@ router.post(
   isAdmin,
   createRecommendedCourse
 );
+
+router.put(routes.userid + "/:courseId", updateCourse);
+
+router.delete(routes.userid + "/:courseId", deleteCourse);
 
 export default router;
