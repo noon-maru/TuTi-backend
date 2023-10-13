@@ -3,6 +3,7 @@
 // ADMIN: 관리자 관련 경로
 // USER: 사용자 관련 경로
 // PLACE: 장소 관련 경로
+// COURSE: 코스 관련 경로
 // HOME SCREEN: 홈 화면 관련 경로
 
 // API BASE
@@ -15,6 +16,7 @@ const LOGOUT: string = "/logout";
 
 // ADMIN
 const ADMIN: string = "/admin";
+const RECOMMENDED: string = "/recommended";
 
 // USER
 const USERS: string = "/users";
@@ -29,6 +31,9 @@ const NAME: string = "/name";
 const REGION: string = "/region";
 const TAG: string = "/tag";
 
+// COURSE
+const COURSE: string = "/course";
+
 // HOME SCREEN
 const CAROUSEL: string = "/carousel";
 
@@ -40,6 +45,7 @@ interface Routes {
   logout: string;
 
   admin: string;
+  recommended: string;
 
   users: string;
   userid: string;
@@ -52,6 +58,8 @@ interface Routes {
   region: string;
   tag: string;
 
+  course: string;
+
   carousel: string;
 }
 
@@ -63,6 +71,7 @@ const routes: Routes = {
   logout: LOGOUT,
 
   admin: ADMIN,
+  recommended: RECOMMENDED,
 
   users: USERS,
   userid: USERID,
@@ -74,6 +83,8 @@ const routes: Routes = {
   name: NAME,
   region: REGION,
   tag: TAG,
+
+  course: COURSE,
 
   carousel: CAROUSEL,
 };

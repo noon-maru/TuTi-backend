@@ -11,6 +11,7 @@ import routes from "@routers/routes";
 import usersRouter from "@routers/userRouter";
 import placeRouter from "@routers/placeRouter";
 import recommendedPlaceRouter from "@routers/recommendedPlacesRouter";
+import courseRouter from "@routers/courseRouter";
 import carouselRouter from "@routers/carouselRouter";
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.set("port", process.env.PORT || 3000);
 app.use(routes.api + routes.users, usersRouter);
 app.use(routes.api + routes.place, placeRouter);
 app.use(routes.api + routes.recommendedplaces, recommendedPlaceRouter);
+app.use(routes.api + routes.course, courseRouter);
 app.use(routes.api + routes.carousel, carouselRouter);
 
 // React 앱의 정적 파일 제공

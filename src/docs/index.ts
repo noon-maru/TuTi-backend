@@ -21,6 +21,7 @@ import "./placeDocs";
 import "./recommendedPlaceDocs";
 import "./userDocs";
 import "./wishPlaceDocs";
+import "./courseDocs";
 
 class ApiDocs {
   private paths: any;

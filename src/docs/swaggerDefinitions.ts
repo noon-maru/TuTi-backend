@@ -8,11 +8,11 @@ export const definitions = {
       address: { type: "string", example: "서울특별시 송파구 올림픽로 300" },
       latitude: {
         type: "number",
-        example: 129.13450507988688,
+        example: 35.15571143112305,
       },
       longitude: {
         type: "number",
-        example: 35.15571143112305,
+        example: 129.13450507988688,
       },
       image: {
         type: "string",
@@ -91,6 +91,17 @@ export const definitions = {
           $ref: "#/components/schemas/Tag",
         },
       },
+    },
+  },
+  Course: {
+    type: "object",
+    properties: {
+      _id: { type: "string", example: "6141d8a726f54729989879c2" },
+      user: { $ref: "#/components/schemas/User" },
+      places: { type: "array", items: { $ref: "#/components/schemas/Place" } },
+      travelTime: { type: "integer", example: 30 },
+      totalFee: { type: "integer", example: 10000 },
+      isRecommended: { type: "boolean", example: true },
     },
   },
 };
