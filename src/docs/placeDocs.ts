@@ -43,11 +43,11 @@ const placeRoutesAPI = {
                 },
                 latitude: {
                   type: "number",
-                  example: 129.13450507988688,
+                  example: 35.15571143112305,
                 },
                 longitude: {
                   type: "number",
-                  example: 35.15571143112305,
+                  example: 129.13450507988688,
                 },
                 image: {
                   type: "string",
@@ -149,11 +149,11 @@ const placeRoutesAPI = {
                   },
                   latitude: {
                     type: "number",
-                    example: 129.13450507988688,
+                    example: 35.15571143112305,
                   },
                   longitude: {
                     type: "number",
-                    example: 35.15571143112305,
+                    example: 129.13450507988688,
                   },
                   image: {
                     type: "string",
