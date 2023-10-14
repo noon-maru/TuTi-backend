@@ -94,7 +94,6 @@ const courseRoutesAPI = {
             example: {
               course: {
                 courseName: "맑은 날 한강공원 나들이",
-                user: "64ccd2ac5ee88918645928e2",
                 places: [
                   "652242f77b34f7b01eb2781a",
                   "64e301bf1e636c9e53de3431",
@@ -252,7 +251,6 @@ const courseRoutesAPI = {
                 {
                   _id: "652940cccf5b9e259fd9c006",
                   courseName: "맑은 날 한강공원 나들이",
-                  user: "64ccd2ac5ee88918645928e2",
                   places: [
                     "652242f77b34f7b01eb2781a",
                     "64e301bf1e636c9e53de3431",
