@@ -11,7 +11,7 @@ export const getCourse = async (req: Request, res: Response) => {
     const user = await User.findOne({ id: userId });
     if (!user) return res.status(400).json({ message: "잘못된 요청입니다." });
 
-    const courses = await Course.find({ user: user._id });
+    const courses = await Course.find({ user: user._id }).populate("places");
 
     if (!courses) {
       return res
@@ -28,7 +28,9 @@ export const getCourse = async (req: Request, res: Response) => {
 
 export const getRecommendedCourse = async (req: Request, res: Response) => {
   try {
-    const courses = await Course.find({ isRecommended: true });
+    const courses = await Course.find({ isRecommended: true }).populate(
+      "places"
+    );
 
     if (!courses) {
       return res
