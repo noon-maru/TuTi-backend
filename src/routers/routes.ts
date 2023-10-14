@@ -33,6 +33,7 @@ const TAG: string = "/tag";
 
 // COURSE
 const COURSE: string = "/course";
+const COURSEID: string = "/:courseid";
 
 // HOME SCREEN
 const CAROUSEL: string = "/carousel";
@@ -59,6 +60,7 @@ interface Routes {
   tag: string;
 
   course: string;
+  courseId: string;
 
   carousel: string;
 }
@@ -85,6 +87,7 @@ const routes: Routes = {
   tag: TAG,
 
   course: COURSE,
+  courseId: COURSEID,
 
   carousel: CAROUSEL,
 };

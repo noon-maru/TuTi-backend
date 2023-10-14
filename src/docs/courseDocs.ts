@@ -121,6 +121,8 @@ const courseRoutesAPI = {
         },
       },
     },
+  },
+  [routes.api + routes.course + routes.userid + routes.courseId]: {
     put: {
       tags: ["Course"],
       summary: "해당 유저가 생성한 코스 수정",

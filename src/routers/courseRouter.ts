@@ -28,8 +28,8 @@ router.post(
   createRecommendedCourse
 );
 
-router.put(routes.userid + "/:courseId", updateCourse);
+router.put(routes.userid + routes.courseId, updateCourse);
 
-router.delete(routes.userid + "/:courseId", deleteCourse);
+router.delete(routes.userid + routes.courseId, deleteCourse);
 
 export default router;
