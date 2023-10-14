@@ -180,42 +180,43 @@ const courseRoutesAPI = {
         },
       },
     },
-  },
-  delete: {
-    tags: ["Course"],
-    summary: "해당 유저가 생성한 코스 삭제",
-    description: "해당 유저가 생성한 코스를 삭제합니다.",
-    parameters: [
-      {
-        name: "courseId",
-        in: "path",
-        description: "수정하려하는 코스의 ID",
-        required: true,
-        type: "string",
-      },
-      {
-        name: "userId",
-        in: "path",
-        description: "코스를 수정하려하는 사용자의 ID",
-        required: true,
-        type: "string",
-      },
-    ],
-    responses: {
-      200: {
-        description: "코스가 성공적으로 삭제되었습니다.",
-      },
-      400: {
-        description: "잘못된 요청입니다.",
-      },
-      404: {
-        description: "해당하는 코스를 찾지 못했습니다.",
-      },
-      500: {
-        description: "코스를 삭제하지 못했습니다",
+    delete: {
+      tags: ["Course"],
+      summary: "해당 유저가 생성한 코스 삭제",
+      description: "해당 유저가 생성한 코스를 삭제합니다.",
+      parameters: [
+        {
+          name: "courseId",
+          in: "path",
+          description: "수정하려하는 코스의 ID",
+          required: true,
+          type: "string",
+        },
+        {
+          name: "userId",
+          in: "path",
+          description: "코스를 수정하려하는 사용자의 ID",
+          required: true,
+          type: "string",
+        },
+      ],
+      responses: {
+        200: {
+          description: "코스가 성공적으로 삭제되었습니다.",
+        },
+        400: {
+          description: "잘못된 요청입니다.",
+        },
+        404: {
+          description: "해당하는 코스를 찾지 못했습니다.",
+        },
+        500: {
+          description: "코스를 삭제하지 못했습니다",
+        },
       },
     },
   },
+
   [routes.api + routes.course + routes.recommended + routes.userid]: {
     get: {
       tags: ["Course"],
