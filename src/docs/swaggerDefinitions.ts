@@ -102,6 +102,7 @@ export const definitions = {
       places: { type: "array", items: { $ref: "#/components/schemas/Place" } },
       travelTime: { type: "integer", example: 30 },
       totalFee: { type: "integer", example: 10000 },
+      isProgress: { type: "boolean", example: false },
       isRecommended: { type: "boolean", example: true },
     },
   },

@@ -160,6 +160,7 @@ const courseRoutesAPI = {
                 ],
                 travelTime: [40],
                 totalFee: 20000,
+                isProgress: true,
               },
             },
           },

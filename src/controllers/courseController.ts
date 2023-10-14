@@ -111,7 +111,7 @@ export const createCourse = async (req: Request, res: Response) => {
 
 export const updateCourse = async (req: Request, res: Response) => {
   const { courseId, userId } = req.params;
-  const { courseName, placesId, travelTime, totalFee } = req.body;
+  const { courseName, placesId, travelTime, totalFee, isProgress } = req.body;
 
   try {
     const course = await Course.findById(courseId);
@@ -147,6 +147,7 @@ export const updateCourse = async (req: Request, res: Response) => {
         places: placesId,
         travelTime,
         totalFee,
+        isProgress,
       },
       { new: true }
     );
