@@ -45,7 +45,7 @@ export const getRecommendedCourse = async (req: Request, res: Response) => {
 
 export const createCourse = async (req: Request, res: Response) => {
   const { userId } = req.params;
-  const { placesId, travelTime, totalFee } = req.body;
+  const { courseName, placesId, travelTime, totalFee } = req.body;
 
   try {
     // 각 장소 ID들이 유효한 값인지 확인
@@ -90,6 +90,7 @@ export const createCourse = async (req: Request, res: Response) => {
 
     // 코스 생성 및 응답
     const course = new Course({
+      courseName,
       user: user._id,
       places: places.map((place) => place._id),
       travelTime,
@@ -110,7 +111,7 @@ export const createCourse = async (req: Request, res: Response) => {
 
 export const updateCourse = async (req: Request, res: Response) => {
   const { courseId, userId } = req.params;
-  const { placesId, travelTime, totalFee } = req.body;
+  const { courseName, placesId, travelTime, totalFee } = req.body;
 
   try {
     const course = await Course.findById(courseId);
@@ -142,6 +143,7 @@ export const updateCourse = async (req: Request, res: Response) => {
     const updatedCourse = await Course.findByIdAndUpdate(
       courseId,
       {
+        courseName,
         places: placesId,
         travelTime,
         totalFee,
@@ -191,7 +193,7 @@ export const deleteCourse = async (req: Request, res: Response) => {
 
 export const createRecommendedCourse = async (req: Request, res: Response) => {
   const { userId } = req.params;
-  const { placesId, travelTime, totalFee } = req.body;
+  const { courseName, placesId, travelTime, totalFee } = req.body;
 
   try {
     // 각 장소 ID들이 유효한 값인지 확인
@@ -236,6 +238,7 @@ export const createRecommendedCourse = async (req: Request, res: Response) => {
 
     // 코스 생성 및 응답
     const course = new Course({
+      courseName,
       user: user._id,
       places: places.map((place) => place._id),
       travelTime,

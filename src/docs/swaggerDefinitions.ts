@@ -97,6 +97,7 @@ export const definitions = {
     type: "object",
     properties: {
       _id: { type: "string", example: "6141d8a726f54729989879c2" },
+      courseName: { type: "string", example: "맑은 날 한강공원 나들이" },
       user: { $ref: "#/components/schemas/User" },
       places: { type: "array", items: { $ref: "#/components/schemas/Place" } },
       travelTime: { type: "integer", example: 30 },
