@@ -83,8 +83,10 @@ export const createCourse = async (req: Request, res: Response) => {
     // 이미 등록한 코스인지 확인
     const existingCourse = await Course.findOne({
       user: user._id,
-      places: { $all: places.map((place) => place._id) },
+      places: { $eq: places.map((place) => place._id) },
     });
+
+    console.log(existingCourse);
 
     if (existingCourse) {
       return res.json({ message: "이미 등록 된 코스입니다." });
@@ -232,7 +234,7 @@ export const createRecommendedCourse = async (req: Request, res: Response) => {
     // 이미 등록한 코스인지 확인
     const existingCourse = await Course.findOne({
       user: user._id,
-      places: { $all: places.map((place) => place._id) },
+      places: { $eq: places.map((place) => place._id) },
     });
 
     if (existingCourse) {
