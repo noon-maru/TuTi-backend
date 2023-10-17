@@ -89,7 +89,7 @@ export const createCourse = async (req: Request, res: Response) => {
     console.log(existingCourse);
 
     if (existingCourse) {
-      return res.json({ message: "이미 등록 된 코스입니다." });
+      return res.status(409).json({ message: "이미 등록 된 코스입니다." });
     }
 
     // 코스 생성 및 응답
@@ -238,7 +238,7 @@ export const createRecommendedCourse = async (req: Request, res: Response) => {
     });
 
     if (existingCourse) {
-      return res.json({ message: "이미 등록 된 코스입니다." });
+      return res.status(409).json({ message: "이미 등록 된 코스입니다." });
     }
 
     // 코스 생성 및 응답

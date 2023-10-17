@@ -117,6 +117,9 @@ const courseRoutesAPI = {
         404: {
           description: "해당하는 유저를 찾을 수 없습니다.",
         },
+        409: {
+          description: "이미 등록 된 코스입니다.",
+        },
         500: {
           description: "코스를 생성하지 못했습니다",
         },
@@ -334,6 +337,9 @@ const courseRoutesAPI = {
         },
         404: {
           description: "해당하는 유저를 찾을 수 없습니다.",
+        },
+        409: {
+          description: "이미 등록 된 코스입니다.",
         },
         500: {
           description: "코스를 생성하지 못했습니다",
