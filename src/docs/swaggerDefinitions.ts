@@ -100,6 +100,7 @@ export const definitions = {
       courseName: { type: "string", example: "맑은 날 한강공원 나들이" },
       user: { $ref: "#/components/schemas/User" },
       places: { type: "array", items: { $ref: "#/components/schemas/Place" } },
+      recordImages: { type: "array", items: "string" },
       travelTime: { type: "integer", example: 30 },
       totalFee: { type: "integer", example: 10000 },
       isProgress: { type: "boolean", example: false },

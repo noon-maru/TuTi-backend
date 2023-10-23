@@ -186,7 +186,7 @@ export const addCourseUserImage = async (req: Request, res: Response) => {
     }
 
     res.json({
-      message: "코스가 성공적으로 업데이트되었습니다.",
+      message: "코스에 이미지를 성공적으로 업데이트하였습니다.",
       recordImage,
     });
   } catch (error) {

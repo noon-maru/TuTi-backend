@@ -348,6 +348,118 @@ const courseRoutesAPI = {
     },
   },
 
+  [routes.api +
+  routes.course +
+  routes.userimage +
+  routes.userId +
+  routes.courseId]: {
+    post: {
+      tags: ["Course"],
+      summary: "해당 유저의 코스에 이미지 추가",
+      description: "해당 유저의 코스에 이미지를 추가합니다.",
+      parameters: [
+        {
+          name: "userId",
+          in: "path",
+          description: "코스에 이미지를 추가하려는 사용자의 ID",
+          required: true,
+          type: "string",
+        },
+        {
+          name: "courseId",
+          in: "path",
+          description: "이미지를 추가하려는 코스의 ObjectID",
+          required: true,
+          type: "string",
+        },
+      ],
+      requestBody: {
+        content: {
+          "application/json": {
+            schema: {
+              $ref: "#/components/schemas/Course",
+            },
+            example: {
+              course: {
+                courseName: "맑은 날 한강공원 나들이",
+                places: [
+                  "652242f77b34f7b01eb2781a",
+                  "64e301bf1e636c9e53de3431",
+                ],
+                travelTime: [40],
+                totalFee: 20000,
+                isProgress: true,
+              },
+            },
+          },
+        },
+        required: true,
+        description: "유저가 수정할 코스 정보",
+      },
+      responses: {
+        200: {
+          description: "코스에 이미지를 성공적으로 업데이트하였습니다.",
+        },
+        403: {
+          description: "코스를 업데이트할 권한이 없습니다",
+        },
+        404: {
+          description: "해당하는 요소를 찾지 못했습니다.",
+        },
+        500: {
+          description: "코스에 이미지를 업데이트하지 못했습니다.",
+        },
+      },
+    },
+  },
+  [routes.api +
+  routes.userimage +
+  routes.course +
+  routes.userId +
+  routes.courseId +
+  routes.imageId]: {
+    delete: {
+      tags: ["Course"],
+      summary: "해당 유저가 생성한 코스 삭제",
+      description: "해당 유저가 생성한 코스를 삭제합니다.",
+      parameters: [
+        {
+          name: "userId",
+          in: "path",
+          description: "코스의 이미지를 삭제하려는 사용자의 ID",
+          required: true,
+          type: "string",
+        },
+        {
+          name: "courseId",
+          in: "path",
+          description: "이미지를 삭제하려는 코스의 ObjectID",
+          required: true,
+          type: "string",
+        },
+        {
+          name: "imageId",
+          in: "path",
+          description: "삭제하려는 이미지의 이름",
+          required: true,
+          type: "string",
+        },
+      ],
+      responses: {
+        200: {
+          description:
+            "이미지가 성공적으로 삭제되었고, 코스가 업데이트되었습니다.",
+        },
+        404: {
+          description: "해당하는 요소를 찾지 못했습니다.",
+        },
+        500: {
+          description: "이미지를 삭제하거나 코스를 업데이트하지 못했습니다.",
+        },
+      },
+    },
+  },
+
   components: {
     schemas: definitions,
   },
