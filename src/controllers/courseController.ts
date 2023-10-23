@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
 import mongoose from "mongoose";
+import path from "path";
+import fs from "fs";
+import sharp from "sharp";
+
 import Course from "@models/courseModel";
 import User from "@models/userModel";
 import Place from "@models/placeModel";
@@ -47,7 +51,7 @@ export const getRecommendedCourse = async (req: Request, res: Response) => {
 
 export const createCourse = async (req: Request, res: Response) => {
   const { userId } = req.params;
-  const { courseName, placesId, travelTime, totalFee } = req.body;
+  const { courseName, placesId, travelTime, totalFee, recordImages } = req.body;
 
   try {
     // 각 장소 ID들이 유효한 값인지 확인
@@ -99,6 +103,7 @@ export const createCourse = async (req: Request, res: Response) => {
       places: places.map((place) => place._id),
       travelTime,
       totalFee,
+      recordImages,
     });
 
     const savedCourse = await course.save();
@@ -113,9 +118,158 @@ export const createCourse = async (req: Request, res: Response) => {
   }
 };
 
+export const addCourseUserImage = async (req: Request, res: Response) => {
+  if (!req.file) {
+    res.status(500).json({ message: "파일 업로드에 실패했습니다." });
+  }
+  const fileName = req.file!.filename.replace(/\.\w+$/, ".webp"); // 파일명
+  const imagePath = req.file!.path; // 파일 경로
+  const outputPath = imagePath.replace(/\.\w+$/, ".webp"); // 저장될 파일의 확장자를 WebP로 변경
+
+  const { userId, courseId } = req.params;
+
+  try {
+    const image = sharp(imagePath);
+
+    const { width } = await image.metadata(); // 원본이미지 크기
+    image
+      .webp()
+      .withMetadata()
+      .resize(width! > 1080 ? 1080 : width) // 원본 비율 유지하면서 width 크기만 설정
+      .toFile(outputPath, (err, info) => {
+        if (err) {
+          console.error("이미지 변환에 실패했습니다.", err);
+          return res.status(500).json({ error: "이미지 변환에 실패했습니다." });
+        }
+
+        // 원본 이미지 삭제
+        fs.unlinkSync(imagePath);
+      });
+
+    const course = await Course.findById(courseId);
+    if (!course) {
+      return res
+        .status(404)
+        .json({ error: "해당하는 코스를 찾지 못했습니다." });
+    }
+
+    const userObject = await User.findById(course.user);
+
+    if (!userObject) {
+      return res
+        .status(404)
+        .json({ error: "해당하는 유저를 찾지 못했습니다." });
+    }
+
+    if (userObject.id !== userId) {
+      return res
+        .status(403)
+        .json({ error: "코스를 업데이트할 권한이 없습니다." });
+    }
+
+    const recordImage = `userimage/${userId}/${courseId}/${fileName}`;
+
+    const updatedCourse = await Course.findByIdAndUpdate(
+      courseId, // 첫 번째 인수: 업데이트할 문서의 ID
+      {
+        $push: {
+          recordImages: recordImage,
+        },
+      }, // 두 번째 인수: 업데이트할 내용
+      { new: true } // { new: true }를 설정하여 업데이트 후의 문서를 반환
+    );
+
+    if (!updatedCourse) {
+      return res
+        .status(404)
+        .json({ error: "해당하는 코스를 찾지 못했습니다." });
+    }
+
+    res.json({
+      message: "코스가 성공적으로 업데이트되었습니다.",
+      recordImage,
+    });
+  } catch (error) {
+    console.error("코스에 이미지를 업데이트하지 못했습니다:", error);
+    res.status(500).json({ error: "코스에 이미지를 업데이트하지 못했습니다." });
+  }
+};
+
+export const deleteCourseUserImage = async (req: Request, res: Response) => {
+  const { userId, courseId, imageId } = req.params; // imageId는 삭제할 이미지의 파일명
+
+  try {
+    const course = await Course.findById(courseId);
+    if (!course) {
+      return res
+        .status(404)
+        .json({ error: "해당하는 코스를 찾지 못했습니다." });
+    }
+
+    const userObject = await User.findById(course.user);
+
+    if (!userObject) {
+      return res
+        .status(404)
+        .json({ error: "해당하는 유저를 찾지 못했습니다." });
+    }
+
+    if (userObject.id !== userId) {
+      return res
+        .status(403)
+        .json({ error: "코스를 업데이트할 권한이 없습니다." });
+    }
+
+    // 이미지 경로를 찾아서 삭제
+    const imagePath = `userimage/${userId}/${courseId}/${imageId}`;
+
+    // 이미지 파일 삭제
+    fs.unlinkSync(
+      path.join(
+        __dirname +
+          "../../../../" +
+          `userimage/${userId}/${courseId}/${imageId}`
+      )
+    );
+
+    // Course 객체에서 이미지 경로 제거
+    const updatedCourse = await Course.findByIdAndUpdate(
+      courseId,
+      {
+        $pull: { recordImages: imagePath },
+      },
+      { new: true }
+    );
+
+    if (!updatedCourse) {
+      return res
+        .status(404)
+        .json({ error: "해당하는 코스를 찾지 못했습니다." });
+    }
+
+    res.json({
+      message: "이미지가 성공적으로 삭제되었고, 코스가 업데이트되었습니다.",
+      course: updatedCourse,
+    });
+  } catch (error) {
+    console.error("이미지를 삭제하거나 코스를 업데이트하지 못했습니다:", error);
+    res
+      .status(500)
+      .json({ error: "이미지를 삭제하거나 코스를 업데이트하지 못했습니다." });
+  }
+};
+
 export const updateCourse = async (req: Request, res: Response) => {
-  const { courseId, userId } = req.params;
-  const { courseName, placesId, travelTime, totalFee, isProgress } = req.body;
+  const { userId, courseId } = req.params;
+  const {
+    courseName,
+    placesId,
+    travelTime,
+    totalFee,
+    recordImages,
+    isProgress,
+    isTermination,
+  } = req.body;
 
   try {
     const course = await Course.findById(courseId);
@@ -126,7 +280,15 @@ export const updateCourse = async (req: Request, res: Response) => {
         .json({ error: "해당하는 코스를 찾지 못했습니다." });
     }
 
-    if (course.user.toString() !== userId) {
+    const userObject = await User.findById(course.user);
+
+    if (!userObject) {
+      return res
+        .status(404)
+        .json({ error: "해당하는 유저를 찾지 못했습니다." });
+    }
+
+    if (userObject.id !== userId) {
       return res
         .status(403)
         .json({ error: "코스를 업데이트할 권한이 없습니다." });
@@ -151,7 +313,9 @@ export const updateCourse = async (req: Request, res: Response) => {
         places: placesId,
         travelTime,
         totalFee,
+        recordImages,
         isProgress,
+        isTermination,
       },
       { new: true }
     );

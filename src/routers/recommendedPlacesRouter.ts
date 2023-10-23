@@ -15,11 +15,11 @@ const router = express.Router();
 router.get("/", getRecommendedPlaces);
 
 // 관리자만 추천 장소를 추가할 수 있습니다.
-router.post(routes.userid, isAdmin, postRecommendedPlace);
+router.post(routes.userId, isAdmin, postRecommendedPlace);
 
 // 관리자만 추천 장소를 삭제할 수 있습니다.
 router.delete(
-  routes.userid + "/:recommendedPlaceId",
+  routes.userId + "/:recommendedPlaceId",
   isAdmin,
   deleteRecommendedPlace
 );

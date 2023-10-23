@@ -4,7 +4,7 @@ import fs from "fs";
 
 import processImages from "@models/grayscaleModel";
 
-import { upload } from "@middleware/multer";
+import { upload } from "@middleware/carouselMulter";
 
 interface ImageData {
   imageName: string;

@@ -20,7 +20,7 @@ const recommendedPlaceAPI = {
                 type: "array",
                 items: {
                   $ref: "#/components/schemas/RecommendedPlace",
-                }
+                },
               },
               example: [
                 {
@@ -98,7 +98,7 @@ const recommendedPlaceAPI = {
   },
   [routes.api +
   routes.recommendedplaces +
-  routes.userid +
+  routes.userId +
   "/:recommendedPlaceId"]: {
     delete: {
       tags: ["RecommendedPlace"],
@@ -137,8 +137,8 @@ const recommendedPlaceAPI = {
   },
 
   components: {
-    schemas: definitions
-  }
+    schemas: definitions,
+  },
 };
 
 swagger.addAPI(recommendedPlaceAPI);

@@ -48,7 +48,7 @@ const userRoutesAPI = {
       },
     },
   },
-  [routes.api + routes.users + routes.userid]: {
+  [routes.api + routes.users + routes.userId]: {
     // 특정 유저의 정보를 가져오는 API
     get: {
       tags: ["User"],

@@ -4,7 +4,7 @@ import SwaggerHandler from "@handler/swagger";
 const swagger = SwaggerHandler.getInstance();
 
 const wishPlaceRoutesAPI = {
-  [routes.api + routes.users + routes.userid + routes.wishplace]: {
+  [routes.api + routes.users + routes.userId + routes.wishplace]: {
     // 유저가 찜한 전체 장소를 가져오는 API
     get: {
       tags: ["WishPlace"],
@@ -120,7 +120,7 @@ const wishPlaceRoutesAPI = {
       },
     },
   },
-  [routes.api + routes.users + routes.userid + routes.wishplace + "/random"]: {
+  [routes.api + routes.users + routes.userId + routes.wishplace + "/random"]: {
     // 유저가 찜한 장소 중 랜덤한 3개를 가져오는 API
     get: {
       tags: ["WishPlace"],

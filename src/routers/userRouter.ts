@@ -12,12 +12,12 @@ const router = express.Router();
 router.get("/", getUsers);
 
 // 특정 유저의 정보를 가져오는 라우터
-router.get(routes.userid, getUser);
+router.get(routes.userId, getUser);
 
 // 로그인 라우터
 router.use(routes.login, loginRouter);
 
 // 찜 한 장소 관련 라우터
-router.use(routes.userid + routes.wishplace, wishPlaceRouter);
+router.use(routes.userId + routes.wishplace, wishPlaceRouter);
 
 export default router;

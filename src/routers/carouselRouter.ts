@@ -15,6 +15,6 @@ router.use(
   express.static(path.join(__dirname, "../", "../", "public", "carousel"))
 );
 
-router.post(routes.userid, isAdmin, postCarousel);
+router.post(routes.userId, isAdmin, postCarousel);
 
 export default router;

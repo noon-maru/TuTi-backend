@@ -33,7 +33,9 @@ const TAG: string = "/tag";
 
 // COURSE
 const COURSE: string = "/course";
-const COURSEID: string = "/:courseid";
+const COURSEID: string = "/:courseId";
+const USERIMAGE: string = "/userimage";
+const IMAGEID: string = "/:imageId";
 
 // HOME SCREEN
 const CAROUSEL: string = "/carousel";
@@ -49,7 +51,7 @@ interface Routes {
   recommended: string;
 
   users: string;
-  userid: string;
+  userId: string;
   editprofile: string;
   wishplace: string;
 
@@ -61,6 +63,8 @@ interface Routes {
 
   course: string;
   courseId: string;
+  userimage: string;
+  imageId: string;
 
   carousel: string;
 }
@@ -76,7 +80,7 @@ const routes: Routes = {
   recommended: RECOMMENDED,
 
   users: USERS,
-  userid: USERID,
+  userId: USERID,
   editprofile: EDITPROFILE,
   wishplace: WISHPLACE,
 
@@ -88,6 +92,8 @@ const routes: Routes = {
 
   course: COURSE,
   courseId: COURSEID,
+  userimage: USERIMAGE,
+  imageId: IMAGEID,
 
   carousel: CAROUSEL,
 };

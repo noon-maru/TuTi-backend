@@ -6,7 +6,7 @@ import { definitions } from "./swaggerDefinitions";
 const swagger = SwaggerHandler.getInstance();
 
 const courseRoutesAPI = {
-  [routes.api + routes.course + routes.userid]: {
+  [routes.api + routes.course + routes.userId]: {
     get: {
       tags: ["Course"],
       summary: "해당 유저가 등록한 코스 조회",
@@ -126,7 +126,7 @@ const courseRoutesAPI = {
       },
     },
   },
-  [routes.api + routes.course + routes.userid + routes.courseId]: {
+  [routes.api + routes.course + routes.userId + routes.courseId]: {
     put: {
       tags: ["Course"],
       summary: "해당 유저가 생성한 코스 수정",
@@ -225,7 +225,7 @@ const courseRoutesAPI = {
     },
   },
 
-  [routes.api + routes.course + routes.recommended + routes.userid]: {
+  [routes.api + routes.course + routes.recommended + routes.userId]: {
     get: {
       tags: ["Course"],
       summary: "추천 코스 조회",

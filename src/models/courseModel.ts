@@ -9,7 +9,9 @@ const courseSchema = new Schema({
   places: [{ type: ObjectId, ref: "Place", required: true }], // 이 코스에 해당하는 장소들
   travelTime: [{ type: Number, default: 0 }], // 각 장소 사이의 이동 시간
   totalFee: { type: Number, required: true }, // 각 장소들의 입장료 총합
+  recordImages: [String], // 유저가 이 코스에 기록하는 이미지 주소
   isProgress: { type: Boolean, default: false }, // 이 코스가 현재 진행 중인 코스인지 여부
+  isTermination: { type: Boolean, default: false }, // 이 코스가 종료된 코스인지 아닌지 여부
   isRecommended: { type: Boolean, default: false }, // 이 코스가 추천 코스인지 여부
 });
 
