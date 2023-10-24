@@ -178,7 +178,7 @@ export const addCourseUserImage = async (req: Request, res: Response) => {
         .json({ error: "이 코스에서 해당 장소를 찾지 못했습니다." });
     }
 
-    const recordImage = `userimage/${userId}/${courseId}/${placeId}/${fileName}`;
+    const recordImage = `/static/userimage/${userId}/${courseId}/${placeId}/${fileName}`;
 
     const updatedCourse = await Course.findByIdAndUpdate(
       courseId, // 첫 번째 인수: 업데이트할 문서의 ID
@@ -243,10 +243,10 @@ export const deleteCourseUserImage = async (req: Request, res: Response) => {
     }
 
     // 이미지 경로를 찾아서 삭제
-    const imagePath = `userimage/${userId}/${courseId}/${placeId}/${imageId}`;
+    const imagePath = `/userimage/${userId}/${courseId}/${placeId}/${imageId}`;
 
     // 이미지 파일 삭제
-    fs.unlinkSync(path.join(__dirname + "../../../../" + imagePath));
+    fs.unlinkSync(path.join(__dirname + "../../../.." + imagePath));
 
     // Course 객체에서 이미지 경로 제거
     const updatedCourse = await Course.findByIdAndUpdate(
