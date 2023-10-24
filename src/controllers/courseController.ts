@@ -252,7 +252,7 @@ export const deleteCourseUserImage = async (req: Request, res: Response) => {
     const updatedCourse = await Course.findByIdAndUpdate(
       courseId,
       {
-        $pull: { recordImages: imagePath },
+        $pull: { recordImages: "/static" + imagePath },
       },
       { new: true }
     );
