@@ -126,7 +126,7 @@ export const addCourseUserImage = async (req: Request, res: Response) => {
   const imagePath = req.file!.path; // 파일 경로
   const outputPath = imagePath.replace(/\.\w+$/, ".webp"); // 저장될 파일의 확장자를 WebP로 변경
 
-  const { userId, courseId } = req.params;
+  const { userId, courseId, placeId } = req.params;
 
   try {
     const image = sharp(imagePath);
@@ -167,7 +167,18 @@ export const addCourseUserImage = async (req: Request, res: Response) => {
         .json({ error: "코스를 업데이트할 권한이 없습니다." });
     }
 
-    const recordImage = `userimage/${userId}/${courseId}/${fileName}`;
+    const place = course.places.find(
+      (placeObjectId: mongoose.Types.ObjectId) =>
+        placeObjectId.toString() === placeId
+    );
+
+    if (!place) {
+      return res
+        .status(404)
+        .json({ error: "이 코스에서 해당 장소를 찾지 못했습니다." });
+    }
+
+    const recordImage = `userimage/${userId}/${courseId}/${placeId}/${fileName}`;
 
     const updatedCourse = await Course.findByIdAndUpdate(
       courseId, // 첫 번째 인수: 업데이트할 문서의 ID
@@ -196,7 +207,7 @@ export const addCourseUserImage = async (req: Request, res: Response) => {
 };
 
 export const deleteCourseUserImage = async (req: Request, res: Response) => {
-  const { userId, courseId, imageId } = req.params; // imageId는 삭제할 이미지의 파일명
+  const { userId, courseId, placeId, imageId } = req.params; // imageId는 삭제할 이미지의 파일명
 
   try {
     const course = await Course.findById(courseId);
@@ -220,17 +231,22 @@ export const deleteCourseUserImage = async (req: Request, res: Response) => {
         .json({ error: "코스를 업데이트할 권한이 없습니다." });
     }
 
+    const place = course.places.find(
+      (placeObjectId: mongoose.Types.ObjectId) =>
+        placeObjectId.toString() === placeId
+    );
+
+    if (!place) {
+      return res
+        .status(404)
+        .json({ error: "이 코스에서 해당 장소를 찾지 못했습니다." });
+    }
+
     // 이미지 경로를 찾아서 삭제
-    const imagePath = `userimage/${userId}/${courseId}/${imageId}`;
+    const imagePath = `userimage/${userId}/${courseId}/${placeId}/${imageId}`;
 
     // 이미지 파일 삭제
-    fs.unlinkSync(
-      path.join(
-        __dirname +
-          "../../../../" +
-          `userimage/${userId}/${courseId}/${imageId}`
-      )
-    );
+    fs.unlinkSync(path.join(__dirname + "../../../../" + imagePath));
 
     // Course 객체에서 이미지 경로 제거
     const updatedCourse = await Course.findByIdAndUpdate(

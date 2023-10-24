@@ -352,7 +352,8 @@ const courseRoutesAPI = {
   routes.course +
   routes.userimage +
   routes.userId +
-  routes.courseId]: {
+  routes.courseId +
+  routes.placeId]: {
     post: {
       tags: ["Course"],
       summary: "해당 유저의 코스에 이미지 추가",
@@ -417,6 +418,7 @@ const courseRoutesAPI = {
   routes.course +
   routes.userId +
   routes.courseId +
+  routes.placeId +
   routes.imageId]: {
     delete: {
       tags: ["Course"],

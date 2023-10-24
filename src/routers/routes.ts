@@ -30,6 +30,7 @@ const RECOMMENDEDPLACE: string = "/recommendedplaces";
 const NAME: string = "/name";
 const REGION: string = "/region";
 const TAG: string = "/tag";
+const PLACEID: string = "/:placeId";
 
 // COURSE
 const COURSE: string = "/course";
@@ -60,6 +61,7 @@ interface Routes {
   name: string;
   region: string;
   tag: string;
+  placeId: string;
 
   course: string;
   courseId: string;
@@ -89,6 +91,7 @@ const routes: Routes = {
   name: NAME,
   region: REGION,
   tag: TAG,
+  placeId: PLACEID,
 
   course: COURSE,
   courseId: COURSEID,

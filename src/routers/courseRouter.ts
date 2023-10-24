@@ -37,16 +37,20 @@ router.put(routes.userId + routes.courseId, updateCourse);
 // 코스를 삭제하는 라우터
 router.delete(routes.userId + routes.courseId, deleteCourse);
 
-// 해당 코스에 사용자 이미지 추가
+// 해당 코스의 특정 장소에 사용자 이미지 추가
 router.post(
-  routes.userimage + routes.userId + routes.courseId,
+  routes.userimage + routes.userId + routes.courseId + routes.placeId,
   upload.single("image"),
   addCourseUserImage
 );
 
-// 해당 코스의 특정 사용자 이미지 삭제
+// 해당 코스의 특정 장소의 사용자 이미지 삭제
 router.delete(
-  routes.userimage + routes.userId + routes.courseId + routes.imageId,
+  routes.userimage +
+    routes.userId +
+    routes.courseId +
+    routes.placeId +
+    routes.imageId,
   deleteCourseUserImage
 );
 

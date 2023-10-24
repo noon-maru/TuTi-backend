@@ -5,7 +5,7 @@ import fs from "fs";
 // 이미지를 저장할 경로와 파일명 설정
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const { userId, courseId } = req.params;
+    const { userId, courseId, placeId } = req.params;
     const userFolder = path.join(
       __dirname,
       "../",
@@ -23,7 +23,12 @@ const storage = multer.diskStorage({
       fs.mkdirSync(courseFolder);
     }
 
-    cb(null, courseFolder);
+    const placeFolder = path.join(courseFolder + "/" + placeId);
+    if (!fs.existsSync(placeFolder)) {
+      fs.mkdirSync(placeFolder);
+    }
+
+    cb(null, placeFolder);
   },
   filename: (req, file, cb) => {
     // 파일명을 현재 날짜와 랜덤 문자열을 포함하여 고유하게 설정
