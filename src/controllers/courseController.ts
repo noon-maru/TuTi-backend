@@ -445,9 +445,12 @@ export const updateCourse = async (req: Request, res: Response) => {
         .json({ error: "해당하는 코스를 찾지 못했습니다." });
     }
 
+    // 업데이트된 문서를 다시 찾아와서 populate 메서드를 적용
+    const populatedCourse = await Course.findById(courseId).populate("places");
+
     res.json({
       message: "코스가 성공적으로 업데이트되었습니다.",
-      course: updatedCourse.populate("places"),
+      course: populatedCourse,
     });
   } catch (error) {
     console.error("코스를 업데이트하지 못했습니다:", error);
