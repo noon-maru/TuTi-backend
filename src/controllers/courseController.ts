@@ -447,7 +447,7 @@ export const updateCourse = async (req: Request, res: Response) => {
 
     res.json({
       message: "코스가 성공적으로 업데이트되었습니다.",
-      course: updatedCourse,
+      course: updatedCourse.populate("places"),
     });
   } catch (error) {
     console.error("코스를 업데이트하지 못했습니다:", error);
