@@ -420,10 +420,49 @@ const courseRoutesAPI = {
   routes.courseId +
   routes.placeId +
   routes.imageId]: {
+    put: {
+      tags: ["Course"],
+      summary: "해당 유저가 생성한 코스 장소 이미지 수정",
+      description: "해당 유저가 생성한 코스장소 이미지를 수정합니다.",
+      parameters: [
+        {
+          name: "userId",
+          in: "path",
+          description: "코스의 이미지를 수정하려는 사용자의 ID",
+          required: true,
+          type: "string",
+        },
+        {
+          name: "courseId",
+          in: "path",
+          description: "이미지를 수정하려는 코스의 ObjectID",
+          required: true,
+          type: "string",
+        },
+        {
+          name: "imageId",
+          in: "path",
+          description: "수정하려는 이미지의 이름",
+          required: true,
+          type: "string",
+        },
+      ],
+      responses: {
+        200: {
+          description: "코스에 이미지를 성공적으로 업데이트하였습니다.",
+        },
+        404: {
+          description: "해당하는 요소를 찾지 못했습니다.",
+        },
+        500: {
+          description: "코스에 이미지를 업데이트하지 못했습니다.",
+        },
+      },
+    },
     delete: {
       tags: ["Course"],
-      summary: "해당 유저가 생성한 코스 삭제",
-      description: "해당 유저가 생성한 코스를 삭제합니다.",
+      summary: "해당 유저가 생성한 코스 장소 이미지 삭제",
+      description: "해당 유저가 생성한 코스 장소 이미지를 삭제합니다.",
       parameters: [
         {
           name: "userId",

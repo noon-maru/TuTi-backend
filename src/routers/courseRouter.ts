@@ -11,6 +11,7 @@ import {
   getCourse,
   getRecommendedCourse,
   updateCourse,
+  updateCourseUserImage,
 } from "@controllers/courseController";
 import { upload } from "@middleware/courseUserImageMulter";
 
@@ -42,6 +43,17 @@ router.post(
   routes.userimage + routes.userId + routes.courseId + routes.placeId,
   upload.single("image"),
   addCourseUserImage
+);
+
+// 해당 코스의 특정 장소의 사용자 이미지 교체
+router.put(
+  routes.userimage +
+    routes.userId +
+    routes.courseId +
+    routes.placeId +
+    routes.imageId,
+  upload.single("image"),
+  updateCourseUserImage
 );
 
 // 해당 코스의 특정 장소의 사용자 이미지 삭제

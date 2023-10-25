@@ -206,6 +206,109 @@ export const addCourseUserImage = async (req: Request, res: Response) => {
   }
 };
 
+export const updateCourseUserImage = async (req: Request, res: Response) => {
+  const { userId, courseId, placeId, imageId } = req.params; // imageId는 삭제할 이미지의 파일명
+
+  if (!req.file) {
+    res.status(500).json({ message: "파일 업로드에 실패했습니다." });
+  }
+  const fileName = req.file!.filename.replace(/\.\w+$/, ".webp"); // 새로 업로드 한 파일명
+  const imagePath = req.file!.path; // 파일 경로
+  const outputPath = imagePath.replace(/\.\w+$/, ".webp"); // 저장될 파일의 확장자를 WebP로 변경
+
+  try {
+    const image = sharp(imagePath);
+
+    const { width } = await image.metadata(); // 원본이미지 크기
+    image
+      .webp()
+      .withMetadata()
+      .resize(width! > 1080 ? 1080 : width) // 원본 비율 유지하면서 width 크기만 설정
+      .toFile(outputPath, (err, info) => {
+        if (err) {
+          console.error("이미지 변환에 실패했습니다.", err);
+          return res.status(500).json({ error: "이미지 변환에 실패했습니다." });
+        }
+
+        // 원본 이미지 삭제
+        fs.unlinkSync(imagePath);
+      });
+
+    const course = await Course.findById(courseId);
+    if (!course) {
+      return res
+        .status(404)
+        .json({ error: "해당하는 코스를 찾지 못했습니다." });
+    }
+
+    const userObject = await User.findById(course.user);
+
+    if (!userObject) {
+      return res
+        .status(404)
+        .json({ error: "해당하는 유저를 찾지 못했습니다." });
+    }
+
+    if (userObject.id !== userId) {
+      return res
+        .status(403)
+        .json({ error: "코스를 업데이트할 권한이 없습니다." });
+    }
+
+    const place = course.places.find(
+      (placeObjectId: mongoose.Types.ObjectId) =>
+        placeObjectId.toString() === placeId
+    );
+
+    if (!place) {
+      return res
+        .status(404)
+        .json({ error: "이 코스에서 해당 장소를 찾지 못했습니다." });
+    }
+
+    // 저장된 이미지 경로
+    const recordImagePath = `/static/userimage/${userId}/${courseId}/${placeId}/${fileName}`;
+
+    // 삭제할 이미지 경로
+    const imagePathToDelete = `/userimage/${userId}/${courseId}/${placeId}/${imageId}`;
+
+    // 배열 내에서 이미지를 직접 찾아 업데이트
+    const recordImages = course.recordImages.map((image) => {
+      if (image === "/static" + imagePathToDelete) {
+        return recordImagePath; // 이미지 경로가 일치하는 경우 새 이미지로 교체
+      }
+      return image;
+    });
+
+    const updatedCourse = await Course.findByIdAndUpdate(
+      courseId, // 첫 번째 인수: 업데이트할 문서의 ID
+      {
+        $set: {
+          recordImages: recordImages,
+        },
+      }, // 두 번째 인수: 업데이트할 내용
+      { new: true } // { new: true }를 설정하여 업데이트 후의 문서를 반환
+    );
+
+    // 스토리지에서 기존 이미지 파일 삭제
+    fs.unlinkSync(path.join(__dirname + "../../../.." + imagePathToDelete));
+
+    if (!updatedCourse) {
+      return res
+        .status(404)
+        .json({ error: "해당하는 코스를 찾지 못했습니다." });
+    }
+
+    res.json({
+      message: "코스에 이미지를 성공적으로 업데이트하였습니다.",
+      recordImagePath,
+    });
+  } catch (error) {
+    console.error("코스에 이미지를 업데이트하지 못했습니다:", error);
+    res.status(500).json({ error: "코스에 이미지를 업데이트하지 못했습니다." });
+  }
+};
+
 export const deleteCourseUserImage = async (req: Request, res: Response) => {
   const { userId, courseId, placeId, imageId } = req.params; // imageId는 삭제할 이미지의 파일명
 
