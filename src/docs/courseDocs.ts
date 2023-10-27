@@ -254,12 +254,13 @@ const courseRoutesAPI = {
                 {
                   _id: "652940cccf5b9e259fd9c006",
                   courseName: "맑은 날 한강공원 나들이",
-                  places: [
+                  placesId: [
                     "652242f77b34f7b01eb2781a",
                     "64e301bf1e636c9e53de3431",
                   ],
                   travelTime: [30],
                   totalFee: 0,
+                  recordImages: [],
                   isRecommended: true,
                   __v: 0,
                 },
