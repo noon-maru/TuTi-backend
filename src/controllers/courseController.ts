@@ -387,6 +387,7 @@ export const updateCourse = async (req: Request, res: Response) => {
     totalFee,
     startDate,
     recordImages,
+    postContent,
     isProgress,
     isTermination,
   } = req.body;
@@ -435,6 +436,7 @@ export const updateCourse = async (req: Request, res: Response) => {
         totalFee,
         startDate,
         recordImages,
+        postContent,
         isProgress,
         isTermination,
       },
