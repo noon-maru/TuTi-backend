@@ -13,7 +13,7 @@ interface ImageData {
 }
 
 // 서버 시작 시 이미지의 그레이스케일 값을 계산하여 변수에 저장
-const averageGrayscaleValuePromise = processImages();
+let averageGrayscaleValuePromise = processImages();
 
 // 이미지 처리 라우트
 
@@ -53,7 +53,7 @@ export const getCarousel = async (req: Request, res: Response) => {
   }
 };
 
-export const postCarousel = (req: Request, res: Response) => {
+export const postCarousel = async (req: Request, res: Response) => {
   // multer 미들웨어 호출
   upload(req, res, (err) => {
     if (err) {
@@ -88,8 +88,44 @@ export const postCarousel = (req: Request, res: Response) => {
         console.error("파일 이름 변경 오류:", renameErr);
         return res.status(500).json({ error: "파일 이름 변경 오류" });
       }
+      // 그레이스케일 값 재계산
+      averageGrayscaleValuePromise = processImages();
 
       res.status(200).json({ message: "캐러셀 이미지 저장 성공" });
     });
   });
+};
+
+export const deleteCarousel = async (req: Request, res: Response) => {
+  const { imageName } = req.params;
+
+  try {
+    // 경로 및 파일 이름 설정
+    const imagePath = path.join(
+      __dirname,
+      "../",
+      "../",
+      "public",
+      "carousel",
+      `${imageName}.png`
+    );
+
+    // 파일 삭제
+    fs.unlink(imagePath, async (err) => {
+      if (err) {
+        console.error("이미지 삭제 오류:", err);
+        return res.status(500).json({ error: "이미지 삭제 오류" });
+      }
+
+      // 그레이스케일 값 재계산
+      averageGrayscaleValuePromise = processImages();
+
+      res
+        .status(200)
+        .json({ message: "이미지 삭제 및 그레이스케일 값 재계산 성공" });
+    });
+  } catch (error) {
+    console.error("내부 서버 오류:", error);
+    res.status(500).send("Internal Server Error");
+  }
 };

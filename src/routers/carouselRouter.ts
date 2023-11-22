@@ -2,7 +2,11 @@ import express from "express";
 import path from "path";
 import routes from "./routes";
 
-import { getCarousel, postCarousel } from "@controllers/carouselController";
+import {
+  deleteCarousel,
+  getCarousel,
+  postCarousel,
+} from "@controllers/carouselController";
 
 import { isAdmin } from "@middleware/isAdmin";
 
@@ -16,5 +20,7 @@ router.use(
 );
 
 router.post(routes.userId, isAdmin, postCarousel);
+
+router.delete(routes.userId + "/:imageName", isAdmin, deleteCarousel);
 
 export default router;
