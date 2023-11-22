@@ -117,6 +117,10 @@ export const postWishPlace = async (req: Request, res: Response) => {
 
     const savedWishPlace = await wishPlace.save();
 
+    // Place의 wishPlaceCount 재계산
+    const count = await WishPlace.countDocuments({ place: placeId });
+    await Place.findByIdAndUpdate(placeId, { wishPlaceCount: count });
+
     return res.json({
       message: "찜한 장소가 성공적으로 추가되었습니다.",
       wishPlace: savedWishPlace,
@@ -155,6 +159,10 @@ export const deleteWishPlace = async (req: Request, res: Response) => {
     if (!deletedWishPlace) {
       return res.json({ message: "찜한 장소를 찾을 수 없습니다." });
     }
+
+    // Place의 wishPlaceCount 재계산
+    const count = await WishPlace.countDocuments({ place: placeId });
+    await Place.findByIdAndUpdate(placeId, { wishPlaceCount: count });
 
     return res.json({
       message: "찜한 장소가 성공적으로 삭제되었습니다.",

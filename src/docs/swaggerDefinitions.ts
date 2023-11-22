@@ -18,8 +18,8 @@ export const definitions = {
         type: "string",
         example: "/static/photo/JPG/서울특별시/송파구/{이미지 이름}.jpg",
       },
-      numberHearts: { type: "integer", format: "int32", example: 100 },
-      is_landmark: {
+      wishPlaceCount: { type: "integer", format: "int32", example: 100 },
+      isLandmark: {
         type: "boolean",
         example: true,
       },

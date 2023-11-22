@@ -54,11 +54,7 @@ const placeRoutesAPI = {
                   example:
                     "/static/photo/JPG/부산광역시/수변공원/FN1A2519-HDR.jpg",
                 },
-                numberHearts: {
-                  type: "integer",
-                  example: 47,
-                },
-                is_landmark: {
+                isLandmark: {
                   type: "boolean",
                   example: true,
                 },
@@ -160,11 +156,7 @@ const placeRoutesAPI = {
                     example:
                       "/static/photo/JPG/부산광역시/수변공원/FN1A2519-HDR.jpg",
                   },
-                  numberHearts: {
-                    type: "number",
-                    example: 47,
-                  },
-                  is_landmark: {
+                  isLandmark: {
                     type: "boolean",
                     example: true,
                   },

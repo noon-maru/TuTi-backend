@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const { Schema } = mongoose;
+const { ObjectId } = Schema.Types;
 
 const placeSchema = new Schema({
   region: { type: String, required: true }, // 장소 지역
@@ -9,9 +10,9 @@ const placeSchema = new Schema({
   latitude: { type: Number, require: true }, // 장소 위도
   longitude: { type: Number, require: true }, // 장소 경도
   image: { type: String, required: true }, // 장소 사진 url
-  numberHearts: { type: Number, default: 0, required: true }, // 해당 장소가 받은 하트 개수
-  is_landmark: { type: Boolean, default: false }, // 해당 장소가 랜드마크인지 여부
-  tags: [{ type: Schema.Types.ObjectId, ref: "Tag" }],
+  wishPlaceCount: { type: Number, default: 0 }, // 해당 장소에 하트를 누른 사람들의 수
+  isLandmark: { type: Boolean, default: false }, // 해당 장소가 랜드마크인지 여부
+  tags: [{ type: ObjectId, ref: "Tag" }],
   tourismInfo: {
     parkingInfo: { type: String },
     advice: { type: String },

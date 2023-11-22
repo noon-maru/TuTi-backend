@@ -26,7 +26,7 @@ const recommendedPlaceAPI = {
                 {
                   _id: "64d8a30611a192dcd638053e",
                   place: {
-                    numberHearts: 0,
+                    wishPlaceCount: 0,
                     tags: [],
                     _id: "64d8a25911a192dcd638051c",
                     region: "제주",
@@ -40,7 +40,6 @@ const recommendedPlaceAPI = {
                 {
                   _id: "64d8a31311a192dcd6380542",
                   place: {
-                    numberHearts: 0,
                     tags: [],
                     _id: "64d8a26e11a192dcd6380520",
                     region: "제주",

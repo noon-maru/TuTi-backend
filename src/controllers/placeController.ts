@@ -11,10 +11,9 @@ export const createPlace = async (req: Request, res: Response) => {
     latitude,
     longitude,
     image,
-    numberHearts,
-    is_landmark,
+    isLandmark,
     tag,
-    tourismInfo, // 새로운 관광 정보 필드 추가
+    tourismInfo,
   } = req.body;
 
   const newTagIds = await createTag(tag);
@@ -35,10 +34,9 @@ export const createPlace = async (req: Request, res: Response) => {
       latitude,
       longitude,
       image,
-      numberHearts,
-      is_landmark,
+      isLandmark,
       tags: newTagIds,
-      tourismInfo, // 관광 정보 추가
+      tourismInfo,
     });
 
     const savedPlace = await newPlace.save();
@@ -81,6 +79,12 @@ export const createTag = async (tagNames: string[]) => {
 export const getAllPlaces = async (req: Request, res: Response) => {
   try {
     const places = await Place.find().populate("tags");
+
+    if (!places) {
+      res.status(404).json({ message: "장소가 존재하지 않습니다." });
+      return;
+    }
+
     res.json(places);
   } catch (err) {
     console.error(err);
@@ -152,8 +156,7 @@ export const updatePlace = async (req: Request, res: Response) => {
     latitude,
     longitude,
     image,
-    numberHearts,
-    is_landmark,
+    isLandmark,
     tag,
     tourismInfo,
   } = req.body;
@@ -170,8 +173,7 @@ export const updatePlace = async (req: Request, res: Response) => {
         latitude,
         longitude,
         image,
-        numberHearts,
-        is_landmark,
+        isLandmark,
         tags: newTagIds,
         tourismInfo,
       },

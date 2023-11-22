@@ -14,7 +14,6 @@ export const loginUser = async (req: Request, res: Response) => {
         id: req.body.id,
         username: req.body.username,
         profile: req.body.profile,
-        isAdmin: req.body.isAdmin,
       });
 
       // 사용자 정보 저장
@@ -23,7 +22,7 @@ export const loginUser = async (req: Request, res: Response) => {
       // 클라이언트에 응답
       res.status(201).json(savedUser);
     } else {
-      res.status(200).json({ message: "이미 회원가입 되어있는 회원입니다." });
+      res.status(200).json(user);
     }
   } catch (error) {
     console.error("회원가입 실패:", error);
