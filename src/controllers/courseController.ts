@@ -51,7 +51,14 @@ export const getRecommendedCourse = async (req: Request, res: Response) => {
 
 export const createCourse = async (req: Request, res: Response) => {
   const { userId } = req.params;
-  const { courseName, placesId, travelTime, totalFee, recordImages } = req.body;
+  const {
+    courseName,
+    placesId,
+    travelTime,
+    totalFee,
+    recordImages,
+    mainRecordImageIndex,
+  } = req.body;
 
   try {
     // 각 장소 ID들이 유효한 값인지 확인
@@ -104,6 +111,7 @@ export const createCourse = async (req: Request, res: Response) => {
       travelTime,
       totalFee,
       recordImages,
+      mainRecordImageIndex,
     });
 
     const savedCourse = await course.save();
@@ -355,6 +363,7 @@ export const deleteCourseUserImage = async (req: Request, res: Response) => {
     const updatedCourse = await Course.findByIdAndUpdate(
       courseId,
       {
+        mainRecordImageIndex: 0,
         $pull: { recordImages: "/static" + imagePath },
       },
       { new: true }
@@ -387,6 +396,7 @@ export const updateCourse = async (req: Request, res: Response) => {
     totalFee,
     startDate,
     recordImages,
+    mainRecordImageIndex,
     postContent,
     isProgress,
     isTermination,
@@ -436,6 +446,7 @@ export const updateCourse = async (req: Request, res: Response) => {
         totalFee,
         startDate,
         recordImages,
+        mainRecordImageIndex,
         postContent,
         isProgress,
         isTermination,
