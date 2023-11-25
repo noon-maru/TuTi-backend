@@ -556,7 +556,7 @@ export const createRecommendedCourse = async (req: Request, res: Response) => {
 
     res.json({
       message: "코스가 성공적으로 추가되었습니다.",
-      course: savedCourse,
+      course: await Course.findById(savedCourse._id).populate("places"),
     });
   } catch (error) {
     console.error("코스를 생성하지 못했습니다:", error);
